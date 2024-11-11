@@ -44,24 +44,24 @@ Ce projet consiste en la création d’un système de chat distribué utilisant 
 
 ### Méthodes du Système
 
-1. **Ingressar_no_sistema** : Permet à un utilisateur de demander son enregistrement dans le système en utilisant son nom. Cette méthode assigne un identifiant unique à l’utilisateur.
-2. **Entrar_na_sala** : Permet à un utilisateur (identifié par son identifiant unique) de rejoindre la salle de discussion.
-3. **Sair_da_sala** : Permet à un utilisateur (identifié par son identifiant unique) de quitter la salle de discussion.
-4. **Enviar_mensagem** : Permet à un utilisateur d’envoyer un message en utilisant son identifiant unique.
-5. **Listar_mensagens** : Permet à un utilisateur de consulter tous les messages publiés dans la salle de discussion.
-6. **Enviar_mensagem_usuario** : Permet à un utilisateur d’envoyer un message privé à un autre utilisateur. Seuls les deux utilisateurs impliqués peuvent voir le message.
-7. **Listar_usuarios** : Permet à un utilisateur d’obtenir la liste des utilisateurs actifs dans la salle de discussion.
+1. **Join_System** : Permet à un utilisateur de demander son enregistrement dans le système en utilisant son nom. Cette méthode assigne un identifiant unique à l’utilisateur.
+2. **Enter_Room** : Permet à un utilisateur (identifié par son identifiant unique) de rejoindre la salle de discussion.
+3. **Leave_Room** : Permet à un utilisateur (identifié par son identifiant unique) de quitter la salle de discussion.
+4. **Send_Message** : Permet à un utilisateur d’envoyer un message en utilisant son identifiant unique.
+5. **List_Messages** : Permet à un utilisateur de consulter tous les messages publiés dans la salle de discussion.
+6. **Send_Message_To_User** : Permet à un utilisateur d’envoyer un message privé à un autre utilisateur. Seuls les deux utilisateurs impliqués peuvent voir le message.
+7. **List_Users** : Permet à un utilisateur d’obtenir la liste des utilisateurs actifs dans la salle de discussion.
 
 ### Instructions d’Utilisation
 
 1. Clonez le dépôt et configurez l'environnement de développement.
-2. Inscrivez-vous dans le système de chat avec la méthode `Ingressar_no_sistema`.
-3. Utilisez `Entrar_na_sala` pour rejoindre la salle de discussion et commencer à participer aux conversations.
-4. Utilisez `Enviar_mensagem` pour envoyer un message à tous les utilisateurs.
-5. Pour envoyer un message privé à un utilisateur spécifique, utilisez `Enviar_mensagem_usuario`.
-6. Consultez tous les messages actuels dans la salle de discussion avec `Listar_mensagens`.
-7. Vérifiez les utilisateurs actifs dans la salle de discussion avec `Listar_usuarios`.
-8. Lorsque vous avez terminé, vous pouvez quitter la salle avec `Sair_da_sala`.
+2. Inscrivez-vous dans le système de chat avec la méthode `Join_System`.
+3. Utilisez `Enter_Room` pour rejoindre la salle de discussion et commencer à participer aux conversations.
+4. Utilisez `Send_Message` pour envoyer un message à tous les utilisateurs.
+5. Pour envoyer un message privé à un utilisateur spécifique, utilisez `Send_Message_To_User`.
+6. Consultez tous les messages actuels dans la salle de discussion avec `List_Messages`.
+7. Vérifiez les utilisateurs actifs dans la salle de discussion avec `List_Users`.
+8. Lorsque vous avez terminé, vous pouvez quitter la salle avec `Leave_Room`.
 
 ### Technologies Utilisées
 
