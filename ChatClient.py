@@ -94,7 +94,6 @@ class ChatClient:
             else:
                 print("Opção inválida, tente novamente.")
 
-# Exemplo de uso
 if __name__ == "__main__":
     client = ChatClient()
     client.exibir_menu()
