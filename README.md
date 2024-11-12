@@ -40,7 +40,7 @@ This project involves the development of a distributed chat system using **RPC**
 
 ### Présentation du Projet
 
-Ce projet consiste en la création d’un système de chat distribué utilisant la technologie **RPC** (Remote Procedure Call). Le client imagine une salle de discussion modulaire où plusieurs utilisateurs peuvent rejoindre, échanger des messages et interagir en temps réel. Le système comprend les méthodes clés suivantes :
+Ce projet consiste en la création d’un système de chat distribué utilisant la technologie **RPC** (Remote Procedure Call). Le client imagine une salle de discussion modulaire où plusieurs utilisateurs peuvent rejoindre, échanger des messages et interagir en temps réel. Le système comprend les méthodes clés suivantes:
 
 ### Méthodes du Système
 
