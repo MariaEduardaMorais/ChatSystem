@@ -35,7 +35,7 @@ class ChatClient:
 
     def listar_mensagens(self):
         if self.usuario_id:
-            mensagens = self.proxy.Listar_mensagens()
+            mensagens = self.proxy.Listar_mensagens(self.usuario_id)
             print("Mensagens no chat:")
             for msg in mensagens:
                 print(msg)
@@ -44,9 +44,9 @@ class ChatClient:
 
     def enviar_mensagem_usuario(self):
         if self.usuario_id:
-            destinatario_id = input("Digite o ID do destinatário: ")
+            destinatario_nome = input("Digite o nome do destinatário: ")
             mensagem = input("Digite a mensagem privada: ")
-            response = self.proxy.Enviar_mensagem_usuario(self.usuario_id, destinatario_id, mensagem)
+            response = self.proxy.Enviar_mensagem_usuario(self.usuario_id, destinatario_nome, mensagem)
             print(response)
         else:
             print("Você precisa estar na sala para enviar mensagens privadas!")

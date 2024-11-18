@@ -3,52 +3,64 @@ import uuid
 
 class ChatServer:
     def __init__(self):
-        self.usuarios = {}
-        self.mensagens = []
-        self.usuarios_ativos = set()
+        self.usuarios = {}  # {usuario_id: nome}
+        self.mensagens = []  # Lista de mensagens públicas
+        self.mensagens_privadas = []  # Lista de mensagens privadas no formato (remetente, destinatário, mensagem)
+        self.usuarios_ativos = set()  # Conjunto de nomes de usuários ativos
 
     def Ingressar_no_sistema(self, nome_do_usuario):
-        # Gera um ID único para o usuário
         usuario_id = str(uuid.uuid4())
         self.usuarios[usuario_id] = nome_do_usuario
         return usuario_id
 
     def Entrar_na_sala(self, usuario_id):
-        # Marca o usuário como ativo
         if usuario_id in self.usuarios:
-            self.usuarios_ativos.add(usuario_id)
-            return f"Usuário {self.usuarios[usuario_id]} entrou na sala."
+            nome = self.usuarios[usuario_id]
+            self.usuarios_ativos.add(nome)
+            return f"Usuário {nome} entrou na sala."
         return "Usuário não encontrado."
 
     def Sair_da_sala(self, usuario_id):
-        # Remove o usuário da lista de ativos
-        if usuario_id in self.usuarios_ativos:
-            self.usuarios_ativos.remove(usuario_id)
-            return f"Usuário {self.usuarios[usuario_id]} saiu da sala."
+        if usuario_id in self.usuarios:
+            nome = self.usuarios[usuario_id]
+            if nome in self.usuarios_ativos:
+                self.usuarios_ativos.remove(nome)
+                return f"Usuário {nome} saiu da sala."
         return "Usuário não está na sala."
 
     def Enviar_mensagem(self, usuario_id, mensagem):
-        # Adiciona a mensagem à lista de mensagens
-        if usuario_id in self.usuarios_ativos:
-            self.mensagens.append(f"{self.usuarios[usuario_id]}: {mensagem}")
-            return "Mensagem enviada com sucesso."
+        if usuario_id in self.usuarios:
+            nome = self.usuarios[usuario_id]
+            if nome in self.usuarios_ativos:
+                self.mensagens.append(f"{nome}: {mensagem}")
+                return "Mensagem enviada com sucesso."
         return "Usuário não está na sala."
 
-    def Listar_mensagens(self):
-        # Retorna todas as mensagens
-        return self.mensagens
-
-    def Enviar_mensagem_usuario(self, usuario_id, destinatario_id, mensagem):
-        # Envia a mensagem apenas para o destinatário
-        if usuario_id in self.usuarios_ativos and destinatario_id in self.usuarios_ativos:
-            return f"Mensagem para {self.usuarios[destinatario_id]}: {mensagem}"
+    def Enviar_mensagem_usuario(self, usuario_id, destinatario_nome, mensagem):
+        if usuario_id in self.usuarios:
+            remetente_nome = self.usuarios[usuario_id]
+            if remetente_nome in self.usuarios_ativos and destinatario_nome in self.usuarios_ativos:
+                self.mensagens_privadas.append((remetente_nome, destinatario_nome, mensagem))
+                return f"Mensagem privada enviada para {destinatario_nome}."
         return "Um ou ambos os usuários não estão na sala."
 
-    def Listar_usuarios(self):
-        # Retorna a lista de usuários ativos
-        return [self.usuarios[usuario_id] for usuario_id in self.usuarios_ativos]
+    def Listar_mensagens(self, usuario_id):
+        if usuario_id in self.usuarios:
+            nome = self.usuarios[usuario_id]
+            if nome in self.usuarios_ativos:
+                # Filtra mensagens públicas e privadas destinadas ao usuário
+                mensagens_destinadas = [
+                    f"(Privada de {remetente}) {mensagem}"
+                    for remetente, destinatario, mensagem in self.mensagens_privadas
+                    if destinatario == nome
+                ]
+                return self.mensagens + mensagens_destinadas
+        return []
 
-# Cria o servidor XML-RPC
+    def Listar_usuarios(self):
+        return list(self.usuarios_ativos)
+
+# Inicia o servidor
 server = SimpleXMLRPCServer(("localhost", 9000))
 server.register_instance(ChatServer())
 
